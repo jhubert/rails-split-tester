@@ -1,0 +1,12 @@
+SplitTester
+===========
+
+This is a plugin that I wrote for doing split testing in a rails application with Google Analytics as your dashboard. The idea is to create an easy to use bucket testing system that wouldn't require another dashboard just for looking at the data. The logic and system are a simplified version of bucket testing based on what I've learned while bucket testing experiments on Yahoo! Search, one of the highest traffic pages on the internet.
+
+With this system, you don't need to muddy up your views, controllers or language files. The test elements are kept separate and can be turned on and off via percentage allocations of your traffic. It is a cookie based system, so users will have a consistent experience even if they end their session and return later. You can also run as many tests at the same time as you would like, only limited by the amount of traffic you have.
+
+I have also built in support for action caching so that you can keep your application fast and awesome.
+
+The code quality isn't as high as I would like and I have taken some shortcuts. I would love any help or input. :)
+
+A new test is a made up of a locale.yml file and or a collection of new views. The local file can override any translations that are in use and the views are direct replacements for views in the core app (BASELINE).
