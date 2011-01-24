@@ -14,7 +14,23 @@ A new test is a made up of a locale.yml file and or a collection of new views. T
 Usage
 ==========
 
+As a plugin:
+
 rails plugin install git://github.com/jhubert/rails-split-tester.git
+
+As a gem:
+
+Place this in your Gemfile:
+
+gem 'split_tester', :git => 'git://github.com/jhubert/rails-split-tester.git'
+
+then run:
+
+bundle install
+
+and then run the generator:
+
+rails g split_tester_install
 
 A file named split_tests.yml will be created in your config folder. This is where you will define the tests you want to run and what percentage of the traffic they should receive.
 
