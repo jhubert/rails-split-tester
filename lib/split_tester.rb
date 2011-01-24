@@ -6,27 +6,39 @@ require 'split_tester/caching'
 module SplitTester
   class Base
     # Doesn't have access to Rails.root here
-    SPLIT_TESTS = YAML.load_file("config/split_tests.yml")
-    unless SPLIT_TESTS.is_a?(Hash)
-      raise 'Invalid config/split_tests.yml file. Unable to parse the split tests.'
+    begin
+      SPLIT_TESTS = YAML.load_file("config/split_tests.yml")
+      SPLIT_TESTS.keys
+      LOADED = true
+    rescue LoadError
+      puts "[SplitTester] Missing config/split_tests.yml"
+      LOADED = false
+    rescue
+      puts "[SplitTester] Invalid config/split_tests.yml"
+      LOADED = false
     end
 
     def self.setup
-      # Add the split test language files to the load path
-      I18n.load_path += Dir[Rails.root.join('test', 'split', '*', 'locale.{rb,yml}')]
+      if LOADED
+        # Add the split test language files to the load path
+        I18n.load_path += Dir[Rails.root.join('test', 'split', '*', 'locale.{rb,yml}')]
 
-      @@preprocessed_pathsets = begin
-        SPLIT_TESTS.keys.reject { |k| k == 'BASELINE' }.inject({}) do |pathsets, slug|
-          path = custom_view_path(slug)
-          pathsets[path] = ActionView::Base.process_view_paths(path).first
-          pathsets
+        @@preprocessed_pathsets = begin
+          SPLIT_TESTS.keys.reject { |k| k == 'BASELINE' }.inject({}) do |pathsets, slug|
+            path = custom_view_path(slug)
+            pathsets[path] = ActionView::Base.process_view_paths(path).first
+            pathsets
+          end
         end
-      end
 
-      @@split_test_map = begin
-        tm = {} # test map
-        SPLIT_TESTS.each { |k, v| tm[k] = v['size'].to_i }
-        tm.keys.zip(tm.values).collect { |v,d| (0...d).collect { v }}.flatten
+        @@split_test_map = begin
+          tm = {} # test map
+          SPLIT_TESTS.each { |k, v| tm[k] = v['size'].to_i }
+          tm.keys.zip(tm.values).collect { |v,d| (0...d).collect { v }}.flatten
+        end
+      else
+        @@split_test_map = []
+        @@preprocessed_pathsets = []
       end
     end
 
@@ -43,6 +55,7 @@ module SplitTester
     end
 
     def self.active_test?(key)
+      return false unless LOADED
       SPLIT_TESTS.has_key?(key)
     end
 
