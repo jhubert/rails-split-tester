@@ -1,0 +1,9 @@
+# Size represents the percent of traffic you want for each test
+# The total of all sizes should equal 100% of traffic.
+# It's easiest to think of it as being based out of 10 or 100.
+BASELINE:
+  description: The baseline. This is a version running the default code.
+  size: 10
+FirstTest:
+  description: This is a sample test. Replace this with your actual test.
+  size: 0

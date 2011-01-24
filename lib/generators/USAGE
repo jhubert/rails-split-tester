@@ -1,0 +1,9 @@
+Description:
+    Generates the initial files for the Split Tester
+
+Example:
+    rails generate split_tester
+
+    This will create:
+      config/split_tests.yml
+      test/split/
