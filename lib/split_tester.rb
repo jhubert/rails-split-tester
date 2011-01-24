@@ -7,6 +7,9 @@ module SplitTester
   class Base
     # Doesn't have access to Rails.root here
     SPLIT_TESTS = YAML.load_file("config/split_tests.yml")
+    unless SPLIT_TESTS.is_a?(Hash)
+      raise 'Invalid config/split_tests.yml file. Unable to parse the split tests.'
+    end
 
     def self.setup
       # Add the split test language files to the load path
