@@ -1,3 +1,1 @@
-# Include hook code here
-require 'action_controller'
-require 'split_tester'
+require File.join(File.dirname(__FILE__), "lib", "split_tester")
