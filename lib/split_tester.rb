@@ -24,7 +24,7 @@ module SplitTester
         I18n.load_path += Dir[Rails.root.join('test', 'split', '*', 'locale.{rb,yml}')]
 
         @@preprocessed_pathsets = begin
-          SPLIT_TESTS.keys.reject { |k| k == 'BASELINE' }.inject({}) do |pathsets, slug|
+          self.test_keys.inject({}) do |pathsets, slug|
             path = custom_view_path(slug)
             pathsets[path] = ActionView::Base.process_view_paths(path).first
             pathsets
@@ -44,6 +44,10 @@ module SplitTester
 
     def self.split_test_map
       @@split_test_map
+    end
+
+    def self.test_keys
+      @test_keys ||= SPLIT_TESTS.keys.reject { |k| k == 'BASELINE' }
     end
 
     def self.preprocessed_pathsets

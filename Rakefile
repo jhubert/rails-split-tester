@@ -34,12 +34,13 @@ PKG_FILES = FileList[
  
 spec = Gem::Specification.new do |s|
   s.name = "split_tester"
-  s.version = "0.2"
+  s.version = "0.4"
   s.author = "Jeremy Hubert"
   s.email = "jhubert@gmail.com"
   s.homepage = "http://jeremyhubert.com/"
   s.platform = Gem::Platform::RUBY
   s.summary = "Provides A/B split testing functionality for Rails"
+  s.description = "Split Tester provides support for A/B Split testing your pages with integration into Google Analytics."
   s.files = PKG_FILES.to_a
   s.require_path = "lib"
   s.has_rdoc = false

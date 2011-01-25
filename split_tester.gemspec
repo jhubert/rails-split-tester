@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'split_tester'
-  s.version     = '0.2'
+  s.version     = '0.4'
   s.summary     = 'Provides A/B split testing functionality for Rails'
   s.description = 'Split Tester provides support for A/B Split testing your pages with integration into Google Analytics.'
 
