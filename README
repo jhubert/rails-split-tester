@@ -22,7 +22,7 @@ As a gem:
 
 Place this in your Gemfile:
 
-gem 'split_tester', :git => 'git://github.com/jhubert/rails-split-tester.git'
+gem 'split_tester'
 
 then run:
 
