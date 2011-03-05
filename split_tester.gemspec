@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "acts_as_keyed/version"
+require "split_tester/version"
 
 Gem::Specification.new do |s|
   s.name        = "split_tester"
